@@ -3,9 +3,10 @@ import React,{useState} from "react"
 import "bootstrap/dist/css/bootstrap.min.css"
 import "react-toastify/dist/ReactToastify.css"
 import './App.css'
-import { toast } from "react-toastify"
+import { toast,ToastContainer } from "react-toastify"
+import {Container,Row,Col} from "reactstrap"
 import BuyPage from "./Components/BuyPage"
-
+import Cart from "./Components/Cart"
 function App() {
   const [cartItem,setCartItem] = useState([])
   const addInCart = item => {
@@ -16,6 +17,7 @@ function App() {
       toast("already added in cart",{
         type:"error"
       })
+return;
     }
     setCartItem([...cartItem,item])
   }
@@ -23,15 +25,19 @@ function App() {
   const buyNow = () => {
     setCartItem([])
     toast("Purchase Complete",{type:"success"})
-  };
+  }
 
-  // const removeItem = item => {
-  //   setCartItem(cartItem.filter(singleItem =>{singleItem.id !== item.id}))
-  // }
+  const removeItem = item => {
+    setCartItem((cartItem.filter(singleItem => singleItem.id !== item.id)))
+  }
   return (
-    <div className="App">
-      <BuyPage addInCart={addInCart}/>
-    </div>
+    <Container fluid>
+      <ToastContainer/>
+      <Row>
+        <Col md="8"><BuyPage addInCart={addInCart}/></Col>
+        <Col md="4"><Cart cartItem={cartItem} removeItem={removeItem} buyNow={buyNow}/></Col>
+      </Row>
+    </Container>
   );
 }
 

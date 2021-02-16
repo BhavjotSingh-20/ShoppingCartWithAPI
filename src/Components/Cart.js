@@ -3,13 +3,13 @@ import {Container,ListGroup,ListGroupItem,Button,CardHeader,CardBody,Card,CardFo
 
 const Cart = ({cartItem,removeItem,buyNow}) => {
     let amount = 0;
-    CartItem.forEach(item => {
+    cartItem.forEach(item => {
         amount = parseFloat(amount) + parseFloat(item.productPrice)
     })
     return (
         <Container fluid >
             <h1 className="text-success">Your Cart</h1>
-            <ListGroup>{cartItem.map(item =>{
+            <ListGroup>{cartItem.map(item => (
                 <ListGroupItem key ={item.id}>
                     <Row>
                         <Col>
@@ -20,14 +20,16 @@ const Cart = ({cartItem,removeItem,buyNow}) => {
                 </ListGroupItem>
                 
                 
-            })}</ListGroup>
+            ))}</ListGroup>
            {
                cartItem.length >=1 ? (
+                   
                    <Card className="text-center mt-3">
                        <CardHeader>Grand Total</CardHeader>
                        <CardBody>Your amount for {cartItem.length} product is {amount} </CardBody>
                        <CardFooter><Button color="success" onClick={buyNow}>Pay Here</Button></CardFooter>
                    </Card>
+                  
                ): (
                    <h1 className="text-warning">Cart is empty!</h1>
                )
