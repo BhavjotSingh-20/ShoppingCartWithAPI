@@ -4,6 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css"
 import "react-toastify/dist/ReactToastify.css"
 import './App.css'
 import { toast } from "react-toastify"
+import BuyPage from "./Components/BuyPage"
 
 function App() {
   const [cartItem,setCartItem] = useState([])
@@ -24,11 +25,13 @@ function App() {
     toast("Purchase Complete",{type:"success"})
   };
 
-  const removeItem = (item) => {
-    setCartItem(cartItem.filter((singleItem) => {singleItem.id !== item.id}))
-  }
+  // const removeItem = item => {
+  //   setCartItem(cartItem.filter(singleItem =>{singleItem.id !== item.id}))
+  // }
   return (
-    <div></div>
+    <div className="App">
+      <BuyPage addInCart={addInCart}/>
+    </div>
   );
 }
 
